@@ -12,7 +12,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: `http://192.168.1.104:3000/api/trpc`,
+          url: `https://pokedex-q7wdlrgru-harvindar994s-projects.vercel.app/api/trpc`,
         }),
       ],
     })
