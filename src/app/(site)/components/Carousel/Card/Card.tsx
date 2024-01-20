@@ -4,11 +4,16 @@ import styles from "./Card.module.scss";
 import Category from './Category';
 import randomColor from '@/app/components/randomColor';
 
+interface PokemonType{
+  id: number,
+  name: string,
+  pokemonId: number
+}
 interface Pokemon{
     name: string,
     sprite: string,
     createdAt: string,
-    types: string[]
+    types: PokemonType[]
 }
 
 const image = "g";
@@ -23,7 +28,7 @@ const Card = (props: Pokemon) => {
           {/* I'm mapping out all the categories */}
           <div className="flex gap-1 pt-2">
             { props.types &&
-              props.types.map((type)=>{
+              props.types.map((type:PokemonType)=>{
                 return <Category key={type.id} name={type.name}/>;
               })
             }
