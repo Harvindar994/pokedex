@@ -118,7 +118,7 @@ export const appRouter = router({
         },
       })
 
-      const result = respose.map((type)=>{
+      const result = respose.map((type: any)=>{
           return type.Pokemon.id;
       })
 

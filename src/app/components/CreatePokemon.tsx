@@ -60,7 +60,7 @@ const CreatePokemon = () => {
         setCreatingPokemon(true);
         try {
 
-            const respose = await uploadImages(formData);
+            const respose:any = await uploadImages(formData);
 
             if (!respose){
                 toast.error("Unbale to upload image");

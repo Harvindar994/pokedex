@@ -7,12 +7,17 @@ import { trpc } from '@/app/_trpc/client';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 
+interface PokemonType{
+  id: number,
+  name: string,
+  pokemonId: number
+}
 interface Pokemon{
     id: number,
     name: string,
     sprite: string,
     createdAt: string,
-    types: string[]
+    types: PokemonType[]
 }
 
 const Carousel = () => {
@@ -28,7 +33,7 @@ const Carousel = () => {
     }
 
     const getPokemon = trpc.getByTypes.useMutation({
-      onSuccess: (success)=>{
+      onSuccess: (success:any)=>{
         setPokemons(success)
       },
 

@@ -21,7 +21,7 @@ const Header = () => {
   const [isMobileSearchActive, setMobileSearchActive] = useState(false);
   
   const getPokemon = trpc.getPokemon.useMutation({
-    onSuccess: (success)=>{
+    onSuccess: (success: any)=>{
       
       if (success.length == 0){
         toast.error("No result found");
@@ -38,10 +38,11 @@ const Header = () => {
   })
 
   function openPokemonForm(){
-    document.getElementById('addPokemonPopup')?.showModal();
+    const popup:any = document.getElementById('addPokemonPopup');
+    popup.showModal();
   }
 
-  async function onSearch(event){
+  async function onSearch(event: any){
       if (event)
         event.preventDefault();
 
