@@ -1,0 +1,47 @@
+.MobileSearch {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: none;
+
+  input {
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+
+    :focus,
+    :active,
+    :checked,
+    :focus-within {
+      background-color: transparent;
+    }
+  }
+
+  button {
+    padding: 5px 16px;
+    height: 100%;
+  }
+}
+
+.MobileMenu {
+  display: none;
+  flex: 1;
+  justify-content: end;
+  gap: 15px;
+
+  button {
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .MobileSearch {
+    display: flex;
+    padding: 0px 0px;
+    align-items: center;
+  }
+
+  .MobileMenu {
+    display: flex;
+  }
+}
