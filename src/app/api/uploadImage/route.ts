@@ -1,3 +1,4 @@
+import { ShowLogs } from "@/app/config/config";
 import { v2 as cloudinary } from "cloudinary";
 import { NextRequest, NextResponse} from "next/server";
 
@@ -30,6 +31,10 @@ export async function POST(request: NextRequest) {
                 tags: ["next-server-actions-upload-sneakers"]
             }, function (error, result) {
                 if (error) {
+
+                    if (ShowLogs)
+                        console.warn(respose);
+
                     reject(error);
                 }
                 else {
@@ -51,6 +56,9 @@ export async function POST(request: NextRequest) {
         }, {status: 200})
 
     } catch (error) {
+        if (ShowLogs)
+            console.log(error)
+        
         return NextResponse.json({
             message: "Unable to upload image"
         }, {status: 400})
