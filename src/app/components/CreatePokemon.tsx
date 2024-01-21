@@ -61,7 +61,7 @@ const CreatePokemon = () => {
         setCreatingPokemon(true);
         try {
 
-            const respose: any = await axios.postForm("/api/uploadImage", formData)
+            const respose: any = await axios.post("/api/uploadImage", formData)
 
             if (!respose || respose.data.error == 402 || respose.status != 200){
                 if (ShowLogs){
