@@ -10,8 +10,6 @@ cloudinary.config({
 });
 
 export default async function uploadImages(formData: FormData) {
-        'use server';
-
         try {
 
             const file = formData.get("image") as File;
