@@ -97,7 +97,7 @@ export const appRouter = router({
     if (opts.input.pokemonType === "All"){
       const respose = await prisma.pokemon.findMany({
         orderBy: {
-          id: 'desc'
+          id: "asc"
         },
         take: 20,
         include: {

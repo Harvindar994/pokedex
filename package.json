@@ -20,6 +20,7 @@
     "@trpc/next": "^11.0.0-next-beta.221",
     "@trpc/react-query": "^11.0.0-next-beta.221",
     "@trpc/server": "^11.0.0-next-beta.221",
+    "axios": "^1.6.5",
     "cloudinary": "^1.41.3",
     "next": "14.1.0",
     "react": "^18",

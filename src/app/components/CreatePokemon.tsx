@@ -12,9 +12,9 @@ import toast from 'react-hot-toast';
 import TosterContext from './TosterContext';
 import { json } from 'stream/consumers';
 import {Cloudinary} from "@cloudinary/url-gen";
-import uploadImages from './uploadImage';
 import Link from 'next/link';
 import { ShowLogs } from '../config/config';
+import axios from 'axios';
 
 const CreatePokemon = () => {
     const [creatingPokemon, setCreatingPokemon] = useState(false);
@@ -61,9 +61,9 @@ const CreatePokemon = () => {
         setCreatingPokemon(true);
         try {
 
-            const respose:any = await uploadImages(formData);
+            const respose: any = await axios.postForm("/api/uploadImage", formData)
 
-            if (!respose){
+            if (!respose || respose.data.error == 402 || respose.status != 200){
                 if (ShowLogs){
                     console.error(respose);
                 }
@@ -75,13 +75,17 @@ const CreatePokemon = () => {
 
             const newPokemon = {
                 ...pokemon,
-                image: respose.secure_url
+                image: respose.data.image
             }
 
             createPokemon.mutate(newPokemon);
             
         } catch (error) {
-            
+
+            if (ShowLogs)
+                console.log(error);
+
+            setCreatingPokemon(false);
             toast.error("Unable to create pokemon");
         } 
     }
