@@ -58,13 +58,13 @@ export const appRouter = router({
 
       }).map(type => {
 
-        return {'name': {'contains': type.trim().replace(/(^[,\s]+)|([,\s]+$)/g, '')}};
+        return {'name': {'contains': type.trim().replace(/(^[,\s]+)|([,\s]+$)/g, ''), mode: "insensitive"}};
 
       });
 
       const respose = prisma.pokemon.findMany({
         where: {
-          OR: types
+          OR: types,
         },
         include: {
           types: true
