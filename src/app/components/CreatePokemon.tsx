@@ -14,6 +14,7 @@ import { json } from 'stream/consumers';
 import {Cloudinary} from "@cloudinary/url-gen";
 import uploadImages from './uploadImage';
 import Link from 'next/link';
+import { ShowLogs } from '../config/config';
 
 const CreatePokemon = () => {
     const [creatingPokemon, setCreatingPokemon] = useState(false);
@@ -63,6 +64,10 @@ const CreatePokemon = () => {
             const respose:any = await uploadImages(formData);
 
             if (!respose){
+                if (ShowLogs){
+                    console.error(respose);
+                }
+
                 toast.error("Unbale to upload image");
                 setCreatingPokemon(false);
                 return;
