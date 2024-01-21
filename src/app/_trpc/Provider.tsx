@@ -9,7 +9,8 @@ import { DevelopmentMode } from "../config/config";
 
 
 export default function Provider({ children }: { children: React.ReactNode }) {
-  let url=null;
+  
+  let url: string = "";
   if (DevelopmentMode){
     url = "http://localhost:3000/api/trpc"
   }else{
