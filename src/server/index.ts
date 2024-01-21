@@ -48,7 +48,7 @@ export const appRouter = router({
       opts.input.bulbasaur += ",";
     }
 
-    const types = opts.input.bulbasaur.split(",").filter(type => {
+    const types:any = opts.input.bulbasaur.split(",").filter(type => {
 
         if (type.trim().replace(/(^[,\s]+)|([,\s]+$)/g, '').length === 0){
           return false;
@@ -58,7 +58,7 @@ export const appRouter = router({
 
       }).map(type => {
 
-        return {'name': {'contains': type.trim().replace(/(^[,\s]+)|([,\s]+$)/g, ''), mode: "insensitive"}};
+        return {'name': {'contains': type.trim().replace(/(^[,\s]+)|([,\s]+$)/g, ''), mode: 'insensitive'}};
 
       });
 
