@@ -29,7 +29,7 @@ export default async function uploadImages(formData: FormData) {
                     }
                     else{
                         resolve(result);
-                    }
+                    } 
 
                 }).end(buffer);
             })
