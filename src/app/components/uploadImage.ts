@@ -1,6 +1,7 @@
 "use server";
 
 import {v2 as cloudinary} from "cloudinary";
+import { ShowLogs } from "../config/config";
 
 cloudinary.config({ 
     cloud_name: 'djl0kis4l', 
@@ -33,6 +34,8 @@ export default async function uploadImages(formData: FormData) {
             })
             
         } catch (error) {
+            if (ShowLogs)
+                console.log(error);
             return null;
         }
 }
