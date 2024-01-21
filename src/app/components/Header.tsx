@@ -34,6 +34,10 @@ const Header = () => {
 
     onError: (error)=>{
       setSaerching(false);
+    },
+
+    onSettled: ()=>{
+      setSaerching(false);
     }
   })
 

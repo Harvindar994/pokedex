@@ -64,6 +64,7 @@ const CreatePokemon = () => {
 
             if (!respose){
                 toast.error("Unbale to upload image");
+                setCreatingPokemon(false);
                 return;
             }
 
