@@ -20,6 +20,7 @@
     "@trpc/next": "^11.0.0-next-beta.221",
     "@trpc/react-query": "^11.0.0-next-beta.221",
     "@trpc/server": "^11.0.0-next-beta.221",
+    "@vercel/blob": "^0.19.0",
     "axios": "^1.6.5",
     "cloudinary": "^1.41.3",
     "dotenv": "^16.3.2",

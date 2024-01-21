@@ -1,7 +1,6 @@
 import { ShowLogs } from "@/app/config/config";
-import { v2 as cloudinary } from "cloudinary";
 import { NextRequest, NextResponse} from "next/server";
-import dotenv from 'dotenv';
+import { put } from "@vercel/blob";
 
 export async function POST(request: NextRequest) {
 
@@ -17,38 +16,10 @@ export async function POST(request: NextRequest) {
             }, {status: 200})
         }
 
-        dotenv.config()
-        cloudinary.config()
-
-        const arrayBuffer = await image.arrayBuffer();
-        const buffer = new Uint8Array(arrayBuffer);
-
-        const respose: any = await new Promise((resolve, reject) => {
-            cloudinary.uploader.upload_stream({
-                tags: ["next-server-actions-upload-sneakers"]
-            }, function (error, result) {
-                if (error) {
-
-                    if (ShowLogs)
-                        console.warn(respose);
-
-                    reject(error);
-                }
-                else {
-                    resolve(result);
-                }
-
-            }).end(buffer);
-        })
-
-        if (!respose){
-            return NextResponse.json({
-                message: "Unable to upload image"
-            }, {status: 400})
-        }
+        const { url } = await put(image.name, image, { access: 'public' });
 
         return NextResponse.json({
-            image: respose.secure_url,
+            image: url,
             message: "Image uploaded"
         }, {status: 200})
 
