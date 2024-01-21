@@ -1,6 +1,7 @@
 import { ShowLogs } from "@/app/config/config";
 import { v2 as cloudinary } from "cloudinary";
 import { NextRequest, NextResponse} from "next/server";
+import dotenv from 'dotenv';
 
 export async function POST(request: NextRequest) {
 
@@ -16,12 +17,8 @@ export async function POST(request: NextRequest) {
             }, {status: 200})
         }
 
-        cloudinary.config({
-            cloud_name: 'djl0kis4l',
-            api_key: process.env.CLOUDINARY_api_key,
-            api_secret: process.env.CLOUDINARY_api_secret,
-            secure: true
-        });
+        dotenv.config()
+        cloudinary.config()
 
         const arrayBuffer = await image.arrayBuffer();
         const buffer = new Uint8Array(arrayBuffer);
