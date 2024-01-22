@@ -5,7 +5,8 @@ import Category from './Category';
 
 interface Props{
   types: string[],
-  onTypeChnage: Function
+  onTypeChnage: Function,
+  loadingPokemon: string
 }
 
 const Categories = (props: Props) => {
@@ -20,7 +21,7 @@ const Categories = (props: Props) => {
     <div className="py-8 flex gap-2 carousel rounded-box">
       {
         props.types.map((category, index)=>{
-          return <Category onClick={onTypeChnage} isActive={category === activeCategory} key={index} name={category}/>;
+          return <Category isLoading={category === props.loadingPokemon} onClick={onTypeChnage} isActive={category === activeCategory} key={index} name={category}/>;
         })
       }
     </div>

@@ -78,7 +78,7 @@ export const appRouter = router({
   
   getRecent: publicProcedure.input(z.object({limit: z.number()})).mutation(async (opts)=>{
 
-    const respose = prisma.pokemon.findMany({
+    const respose = await prisma.pokemon.findMany({
       orderBy: {
         id: 'desc'
       },
@@ -137,7 +137,7 @@ export const appRouter = router({
 
   getTypes: publicProcedure.query(async ()=>{
 
-    const respose = prisma.pokemonType.findMany({
+    const respose = await prisma.pokemonType.findMany({
       where:{},
       distinct: ['name']
     })
@@ -145,6 +145,26 @@ export const appRouter = router({
     return respose;
       
   }),
+
+  getPokemonByOffset: publicProcedure.input(z.object({limit: z.number(), fetched: z.number()})).mutation(async (opts)=>{
+
+    const respose = await prisma.pokemon.findMany({
+      skip: opts.input.fetched,
+      take: opts.input.limit,
+      orderBy: {
+        id: "asc"
+      },
+      include: {
+        types: true
+      }
+    })
+
+    return {
+      pokemons: respose,
+      isEnded: respose.length < opts.input.limit
+    };
+      
+  })
 });
 
 export type AppRouter = typeof appRouter;

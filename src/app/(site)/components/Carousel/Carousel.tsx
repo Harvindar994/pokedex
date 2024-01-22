@@ -23,6 +23,7 @@ interface Pokemon{
 const Carousel = () => {
     const [pokemons, setPokemons] = useState([]);
     const [activeType, setActiveType] = useState('All');
+    const [loadingPokemon, setLoadingPokemon] = useState('All')
 
     let types = trpc.getTypes.useQuery();
 
@@ -39,6 +40,10 @@ const Carousel = () => {
 
       onError: (error)=>{
         toast.error("Unable to fetch showcase pokemon");
+      },
+
+      onSettled: ()=>{
+        setLoadingPokemon("");
       }
     })
 
@@ -50,12 +55,13 @@ const Carousel = () => {
 
     function onchange(name: string){
         setActiveType(name);
+        setLoadingPokemon(name);
         getPokemon.mutate({pokemonType: name});
     }
 
     return (
         <div className="px-10 md:px-7">
-            {types && <Categories onTypeChnage={onchange} types={_types}/>}
+            {types && <Categories loadingPokemon={loadingPokemon} onTypeChnage={onchange} types={_types}/>}
             <div className="carousel carousel-center space-x-4 rounded-box">
 
                 {/* maping all the cards */}

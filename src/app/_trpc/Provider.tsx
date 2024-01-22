@@ -11,13 +11,15 @@ import { DevelopmentMode } from "../config/config";
 export default function Provider({ children }: { children: React.ReactNode }) {
   
   let url: string = "";
+
   if (DevelopmentMode){
-    url = "http://localhost:3000/api/trpc"
+    url = "http://192.168.1.104:3000/api/trpc"
   }else{
     url = "https://pokedex-amber-tau.vercel.app/api/trpc"
   }
 
   const [queryClient] = useState(() => new QueryClient({}));
+  
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [
@@ -27,9 +29,11 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       ],
     })
   );
+
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </trpc.Provider>
   );
+  
 }

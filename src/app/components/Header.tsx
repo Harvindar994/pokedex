@@ -85,6 +85,7 @@ const Header = () => {
                 }
               }} value={searchQuery} className="text-sm" placeholder="Search Separated with , or single name" name="search" />
               <button type="submit"><FaArrowRightLong/></button>
+              {isSearching && <progress className="progress w-full absolute bottom-0 left-0 rounded-none h-1 md:h-0.5"></progress>}
           </form>}
 
           <div className="MobileMenu text-xl">
