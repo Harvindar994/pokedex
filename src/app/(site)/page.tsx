@@ -82,7 +82,7 @@ export default function Home() {
             <PokemonShowcase/>
             <Section name="Recently added Pokemons" cards={recentPokemons} marginBottom="pb-0"/>
             <div className={`px-10 md:px-7 pb-14 pt-14 md:pt-8 flex flex-col`}>
-              <h1 className="text-2xl font-bold pb-7 md:text-base">All Pokemon's</h1>
+              <h1 className="text-2xl font-bold pb-7 md:text-base">All Pokemons</h1>
               {/* carousel carousel-center space-x-4 rounded-box */}
               {/* flex flex-wrap gap-4 sm:justify-center */}
               <div className="flex flex-wrap gap-4 sm:justify-center">
