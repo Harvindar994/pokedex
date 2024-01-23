@@ -13,7 +13,8 @@ interface Pokemon{
     name: string,
     sprite: string,
     createdAt: string,
-    types: PokemonType[]
+    types: PokemonType[],
+    children: React.ReactNode
 }
 
 const image = "g";
@@ -21,6 +22,7 @@ const image = "g";
 const Card = (props: Pokemon) => {
   return (
     <div className={`carousel-item relative rounded-box overflow-hidden`} style={{backgroundColor: randomColor()}}>
+        {props.children}
         <img src={props.sprite} width="215px" height="215px" className="object-cover object-center" />
         <div className="absolute bottom-0 pt-10 left-0 p-5 w-full bg-gradient-to-t from-black/30 to-transparent">
           <p className="text-xl font-bold text-white">{props.name}</p>

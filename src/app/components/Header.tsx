@@ -144,7 +144,7 @@ const Header = () => {
           </label>
       </div>
 
-      {searchResult && searchResult.length > 0 ? <SearchResults pokemon={searchResult}/> : null}
+      {searchResult && searchResult.length > 0 ? <SearchResults setPokemons={setSearchResult} pokemon={searchResult}/> : null}
     </div>
   )
 }

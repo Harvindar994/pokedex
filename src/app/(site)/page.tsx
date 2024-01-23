@@ -7,6 +7,7 @@ import { trpc } from '@/app/_trpc/client';
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import PokemonRow from "../components/PokemonRow";
+import DeletePokemon from "../components/DeletePokemon";
 
 interface Type{
     id: number,
@@ -77,10 +78,26 @@ export default function Home() {
       }
     }
 
+    function onDeleteRecent(){
+      getRecentPokemon.mutate({limit: 20});
+    }
+
+    function onDelete(){
+      if (!isEnded && !isLoading){
+        setIsLoading(true);
+        
+        getByOffset.mutate({
+          limit: 1,
+          fetched: pokemons.length
+        });
+      }
+    }
+
     return (
         <div>
             <PokemonShowcase/>
-            <Section name="Recently added Pokemons" cards={recentPokemons} marginBottom="pb-0"/>
+            <Section onDelete={onDeleteRecent} name="Recently added Pokemons" cards={recentPokemons} marginBottom="pb-0"/>
+
             <div className={`px-10 md:px-7 pb-14 pt-14 md:pt-8 flex flex-col`}>
               <h1 className="text-2xl font-bold pb-7 md:text-base">All Pokemons</h1>
               {/* carousel carousel-center space-x-4 rounded-box */}
@@ -89,7 +106,9 @@ export default function Home() {
 
                   {
                       pokemons.map((card: Pokemon)=>{
-                          return <PokemonRow key={card.id} {...card}/>
+                          return <PokemonRow key={card.id} {...card}>
+                            <DeletePokemon id={card.id} onDelete={onDelete} pokemons={pokemons} setPokemons={setPokemons}/>
+                          </PokemonRow>
                       })
                   }
 

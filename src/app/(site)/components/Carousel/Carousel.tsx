@@ -6,6 +6,7 @@ import Card from './Card/Card';
 import { trpc } from '@/app/_trpc/client';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
+import DeletePokemon from '@/app/components/DeletePokemon';
 
 interface PokemonType{
   id: number,
@@ -53,6 +54,10 @@ const Carousel = () => {
 
     }, [])
 
+    function reload(){
+      getPokemon.mutate({pokemonType: activeType});
+    }
+
     function onchange(name: string){
         setActiveType(name);
         setLoadingPokemon(name);
@@ -63,11 +68,13 @@ const Carousel = () => {
         <div className="px-10 md:px-7">
             {types && <Categories loadingPokemon={loadingPokemon} onTypeChnage={onchange} types={_types}/>}
             <div className="carousel carousel-center space-x-4 rounded-box">
-
+            
                 {/* maping all the cards */}
                 {   pokemons &&
                     pokemons.map((card:Pokemon)=>{
-                        return <Card key={card.id} sprite={card.sprite} name={card.name} types={card.types} createdAt={card.createdAt}/>
+                        return <Card key={card.id} sprite={card.sprite} name={card.name} types={card.types} createdAt={card.createdAt}>
+                          <DeletePokemon onDelete={reload} id={card.id} pokemons={pokemons} setPokemons={setPokemons}/>
+                        </Card>
                     })
                 }
                 

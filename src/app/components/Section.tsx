@@ -1,5 +1,6 @@
 import React from 'react';
 import PokemonRow from '@/app/components/PokemonRow';
+import DeletePokemon from './DeletePokemon';
 
 
 interface Type{
@@ -21,6 +22,7 @@ interface Props{
     cards: Pokemon[],
     marginTop?: string,
     marginBottom?: string,
+    onDelete: CallableFunction
 }
 
 const Section = (props: Props) => {
@@ -33,7 +35,9 @@ const Section = (props: Props) => {
 
             {
                 props.cards.map((card: Pokemon)=>{
-                    return <PokemonRow key={card.id} {...card}/>
+                    return <PokemonRow key={card.id} {...card}>
+                        <DeletePokemon id={card.id} onDelete={props.onDelete}/>
+                    </PokemonRow>
                 })
             }
 

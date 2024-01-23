@@ -1,5 +1,6 @@
 import React from 'react';
 import randomColor from './randomColor';
+import DeletePokemon from './DeletePokemon';
 
 interface Type{
     id: number,
@@ -12,17 +13,21 @@ interface Pokemon{
     name: string,
     sprite: string,
     createdAt: string,
-    types: Type[]
+    types: Type[],
+    children: React.ReactNode
 }
 
 const PokemonRow = (props: Pokemon) => {
   return (
     <div style={{width: "217px"}} className="card bg-base-100 carousel-item border-neutral-content border-opacity-10 border flex flex-col">
         <figure className="h-full" style={{backgroundColor: randomColor()}}><img className="h-fullobject-cover w-full" src={props.sprite} alt="Shoes" /></figure>
+        {props.children}
         <div className="card-body px-4 py-4 h-1/2">
             <h2 className="card-title mb-2 text-sm">
                 {props.name}
-                <div className="badge badge-secondary text-xs">{props.id}</div>
+                <div className="badge badge-secondary text-xs">
+                    {props.id}
+                </div>
             </h2>
             
             <div className="card-actions">

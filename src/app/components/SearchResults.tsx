@@ -6,6 +6,7 @@ import { trpc } from '@/app/_trpc/client';
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import PokemonRow from '@/app/components/PokemonRow';
+import DeletePokemon from './DeletePokemon';
 
 interface Type{
     id: number,
@@ -22,7 +23,8 @@ interface Pokemon{
 }
 
 interface Props{
-    pokemon: Pokemon[]
+    pokemon: Pokemon[],
+    setPokemons: CallableFunction
 }
 
 const SearchResults = (props: Props) => {
@@ -36,7 +38,9 @@ const SearchResults = (props: Props) => {
 
                 {
                     props.pokemon.map((card: Pokemon)=>{
-                        return <PokemonRow key={card.id} {...card}/>
+                        return <PokemonRow key={card.id} {...card}>
+                            <DeletePokemon id={card.id} pokemons={props.pokemon} setPokemons={props.setPokemons}/>
+                        </PokemonRow>
                     })
                 }
 

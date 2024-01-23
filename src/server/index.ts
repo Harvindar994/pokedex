@@ -164,7 +164,22 @@ export const appRouter = router({
       isEnded: respose.length < opts.input.limit
     };
       
-  })
+  }),
+
+  deletePokemon: publicProcedure.input(z.object({id: z.number()})).mutation(async (opts)=>{
+
+    const respose = await prisma.pokemon.delete({
+      where: {
+        id: opts.input.id
+      },
+      include: {
+        types: true
+      }
+    })
+
+    return true;
+      
+  }),
 });
 
 export type AppRouter = typeof appRouter;
